@@ -37007,6 +37007,10 @@ var _create2 = _interopRequireDefault(_create);
 
 var _reactRouter = __webpack_require__(22);
 
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37102,9 +37106,11 @@ var Notes = function (_Component3) {
                 deleteNote = _props.deleteNote;
 
             var notesTemplate = data.map(function (item, index) {
+                var isExpired = (0, _moment2.default)().isAfter((0, _moment2.default)(item.date, 'DD/MM/YYYY'));
+                console.log(isExpired);
                 return _react2.default.createElement(
                     'li',
-                    { className: 'note', key: index },
+                    { className: isExpired ? 'note expired' : 'note', key: index },
                     _react2.default.createElement(
                         'div',
                         { className: 'note_title' },

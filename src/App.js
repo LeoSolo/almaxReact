@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Create from './create';
 import { Link } from 'react-router';
+import moment from 'moment';
 
 export class App extends  Component {
     render() {
@@ -47,8 +48,10 @@ class Notes extends Component {
     render() {
         let {data, deleteNote} = this.props;
         let notesTemplate = data.map((item, index)=>{
+            let isExpired = moment().isAfter(moment(item.date, 'DD/MM/YYYY'));
+            console.log(isExpired);
             return (
-                <li className="note" key={index}>
+                <li className={isExpired ? 'note expired' : 'note'} key={index}>
                     <div className="note_title">{item.title}</div>
                     <div className="note_description">{item.description}</div>
                     <span className="note_date">{item.date}</span>

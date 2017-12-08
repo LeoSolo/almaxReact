@@ -128,3 +128,9 @@ body {
     top: 0;
     right: 100px;
 }
+.note.expired{
+    background: #ffb5b5;
+}
+ul.note.done{
+    background: green;
+}
