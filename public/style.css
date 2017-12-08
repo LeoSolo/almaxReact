@@ -1,0 +1,130 @@
+*{
+    box-sizing: border-box;
+}
+body {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #e4e4e4;
+    margin: 0;
+    overflow: hidden;
+    font-size: 13px;
+}
+.notesList{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 60px 0 0 0;
+    padding: 0;
+    list-style-type: none;
+    overflow: scroll;
+}
+.createBtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    background: url("img/plus.svg") center center no-repeat;
+    background-size: 50%;
+}
+.backBtn{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 44px;
+    height: 44px;
+    background: url("img/back.svg") center center no-repeat;
+    background-size: 50%;
+}
+.notesList li{
+    position: relative;
+    width: 100%;
+    height: 64px;
+    border-top: 1px solid grey;
+    overflow: hidden;
+    padding-left: 4px;
+    background: #fff;
+}
+.notesList li:last-child{
+    border-bottom: 1px solid grey;
+}
+.note .note_title{
+    position: relative;
+    width: 45%;
+    height: 34px;
+    line-height: 34px;
+    font-size: 1.4em;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-overflow: ellipsis;
+}
+.note .note_description{
+    position: relative;
+    width: 60%;
+    height: 30px;
+    font-size: 1.1em;
+    text-overflow: ellipsis;
+}
+.note .controlBtn{
+    position: absolute;
+    top: 0;
+    width: 44px;
+    height: 100%;
+}
+.note .controlBtn:active{
+    opacity: .5;
+}
+.note .editBtn{
+    right: 44px;
+    background: url("img/edit.svg") center center no-repeat, yellow;
+    background-size: 54%;
+}
+.note .deleteBtn{
+    right: 0;
+    background: url("img/delete.svg") center center no-repeat, red;
+    background-size: 54%;
+}
+.createContainer{
+    padding: 60px 8px 0 8px;
+}
+.createContainer input{
+    position: relative;
+    width: 260px;
+    height: 30px;
+    padding-left: 4px;
+    margin-bottom: 10px;
+}
+.createContainer textarea{
+    position: relative;
+    width: 260px;
+    height: 90px;
+    padding-left: 4px;
+    resize: none;
+}
+.saveBtn{
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    width: 200px;
+    height: 44px;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 44px;
+    background: green;
+    color: #fff;
+    font-size: 1.5em;
+}
+.saveBtn:active{
+    opacity: .5;
+}
+.note_date{
+    position: absolute;
+    width: 65px;
+    height: 100%;
+    line-height: 64px;
+    color: grey;
+    top: 0;
+    right: 100px;
+}
