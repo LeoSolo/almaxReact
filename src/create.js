@@ -15,6 +15,7 @@ class Create extends Component {
                 title: '',
                 description: '',
                 date: moment(),
+                done: false,
                 id: Date.now().toString()
             },
             notes
@@ -41,7 +42,15 @@ class Create extends Component {
         indexNote !== -1 ? notes[indexNote] = note : notes.push(note);
         localStorage.setItem('testApp', JSON.stringify({notes}));
     }
+    setDone(isDone) {
+        const {note} = this.state;
+        note.done = JSON.parse(isDone);
+        this.setState({
+            note
+        });
+    }
     render() {
+        let isEdit = !!this.props.params.id;
         return (
             <div className="createContainer">
                 <Link to="/" className="backBtn" />
@@ -52,6 +61,11 @@ class Create extends Component {
                     onChange={(date) => this.handleChange(date)}
                 />
                 <textarea name="description" placeholder="Описание" type="text" value={this.state.note.description} onChange={(e) => this.editField(e.target.value, e.target.name)}/>
+                {
+                    isEdit ?
+                        <span className="doneContainer"><input name="done" type="checkbox" checked={this.state.note.done} onChange={(e) => this.setDone(e.target.checked)}/>done</span> :
+                        null
+                }
                 <Link to="/" className="saveBtn" onClick={() => this.saveNote()}>Save</Link>
             </div>
         );

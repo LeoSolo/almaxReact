@@ -95,6 +95,16 @@ body {
     padding-left: 4px;
     margin-bottom: 10px;
 }
+.doneContainer{
+    position: relative;
+    display: block;
+    width: 80px;
+    height: 30px;
+}
+.createContainer input[name="done"]{
+    height: 30px;
+    width: 30px;
+}
 .createContainer textarea{
     position: relative;
     width: 260px;
@@ -131,6 +141,6 @@ body {
 .note.expired{
     background: #ffb5b5;
 }
-ul.note.done{
-    background: green;
+.note.done{
+    background: #bfffc7;
 }

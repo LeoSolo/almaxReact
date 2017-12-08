@@ -49,9 +49,14 @@ class Notes extends Component {
         let {data, deleteNote} = this.props;
         let notesTemplate = data.map((item, index)=>{
             let isExpired = moment().isAfter(moment(item.date, 'DD/MM/YYYY'));
-            console.log(isExpired);
+            let className = 'note';
+            if(item.done){
+                className+= ' done'
+            }else if(isExpired){
+                className+= ' expired'
+            }
             return (
-                <li className={isExpired ? 'note expired' : 'note'} key={index}>
+                <li className={className} key={index}>
                     <div className="note_title">{item.title}</div>
                     <div className="note_description">{item.description}</div>
                     <span className="note_date">{item.date}</span>

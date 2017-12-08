@@ -7254,6 +7254,7 @@ var Create = function (_Component) {
                 title: '',
                 description: '',
                 date: (0, _moment2.default)(),
+                done: false,
                 id: Date.now().toString()
             },
             notes: notes
@@ -7296,10 +7297,21 @@ var Create = function (_Component) {
             localStorage.setItem('testApp', JSON.stringify({ notes: notes }));
         }
     }, {
+        key: 'setDone',
+        value: function setDone(isDone) {
+            var note = this.state.note;
+
+            note.done = JSON.parse(isDone);
+            this.setState({
+                note: note
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
 
+            var isEdit = !!this.props.params.id;
             return _react2.default.createElement(
                 'div',
                 { className: 'createContainer' },
@@ -7317,6 +7329,14 @@ var Create = function (_Component) {
                 _react2.default.createElement('textarea', { name: 'description', placeholder: '\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435', type: 'text', value: this.state.note.description, onChange: function onChange(e) {
                         return _this2.editField(e.target.value, e.target.name);
                     } }),
+                isEdit ? _react2.default.createElement(
+                    'span',
+                    { className: 'doneContainer' },
+                    _react2.default.createElement('input', { name: 'done', type: 'checkbox', checked: this.state.note.done, onChange: function onChange(e) {
+                            return _this2.setDone(e.target.checked);
+                        } }),
+                    'done'
+                ) : null,
                 _react2.default.createElement(
                     _reactRouter.Link,
                     { to: '/', className: 'saveBtn', onClick: function onClick() {
@@ -37107,10 +37127,15 @@ var Notes = function (_Component3) {
 
             var notesTemplate = data.map(function (item, index) {
                 var isExpired = (0, _moment2.default)().isAfter((0, _moment2.default)(item.date, 'DD/MM/YYYY'));
-                console.log(isExpired);
+                var className = 'note';
+                if (item.done) {
+                    className += ' done';
+                } else if (isExpired) {
+                    className += ' expired';
+                }
                 return _react2.default.createElement(
                     'li',
-                    { className: isExpired ? 'note expired' : 'note', key: index },
+                    { className: className, key: index },
                     _react2.default.createElement(
                         'div',
                         { className: 'note_title' },

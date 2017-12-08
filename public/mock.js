@@ -5,6 +5,7 @@ const mockingNotes = {
             description: 'bla bla bla bla bla',
             importance: 'high',
             date: '12/07/2017',
+            done: false,
             id: '1'
 
         },
@@ -12,7 +13,8 @@ const mockingNotes = {
             title: 'title 2',
             description: 'bla bla bla bla bla',
             importance: 'low',
-            date: '14/11/2017',
+            date: '14/11/2018',
+            done: false,
             id: '2'
         },
         {
@@ -20,6 +22,7 @@ const mockingNotes = {
             description: 'bla bla bla bla bla',
             importance: 'medium',
             date: '16/02/2017',
+            done: false,
             id: '3'
         },
         {
@@ -27,6 +30,7 @@ const mockingNotes = {
             description: 'bla bla bla bla bla',
             importance: 'high',
             date: '19/01/2017',
+            done: false,
             id: '4'
         }
     ]
