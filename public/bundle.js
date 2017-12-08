@@ -7296,9 +7296,6 @@ var Create = function (_Component) {
             localStorage.setItem('testApp', JSON.stringify({ notes: notes }));
         }
     }, {
-        key: 'deleteNote',
-        value: function deleteNote() {}
-    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -37057,13 +37054,30 @@ var MainPage = exports.MainPage = function (_Component2) {
     }
 
     _createClass(MainPage, [{
+        key: 'deleteNote',
+        value: function deleteNote(id) {
+            var notes = this.state.notes;
+            var indexNote = notes.findIndex(function (currentNote) {
+                return currentNote.id === id;
+            });
+            notes.splice(indexNote, 1);
+            this.setState({
+                notes: notes
+            });
+            localStorage.setItem('testApp', JSON.stringify({ notes: notes }));
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this3 = this;
+
             return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement(_reactRouter.Link, { to: 'create', className: 'createBtn' }),
-                _react2.default.createElement(Notes, { data: this.state.notes })
+                _react2.default.createElement(Notes, { data: this.state.notes, deleteNote: function deleteNote(id) {
+                        return _this3.deleteNote(id);
+                    } })
             );
         }
     }]);
@@ -37074,16 +37088,19 @@ var MainPage = exports.MainPage = function (_Component2) {
 var Notes = function (_Component3) {
     _inherits(Notes, _Component3);
 
-    function Notes() {
+    function Notes(props) {
         _classCallCheck(this, Notes);
 
-        return _possibleConstructorReturn(this, (Notes.__proto__ || Object.getPrototypeOf(Notes)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (Notes.__proto__ || Object.getPrototypeOf(Notes)).call(this, props));
     }
 
     _createClass(Notes, [{
         key: 'render',
         value: function render() {
-            var data = this.props.data;
+            var _props = this.props,
+                data = _props.data,
+                deleteNote = _props.deleteNote;
+
             var notesTemplate = data.map(function (item, index) {
                 return _react2.default.createElement(
                     'li',
@@ -37104,7 +37121,9 @@ var Notes = function (_Component3) {
                         item.date
                     ),
                     _react2.default.createElement(_reactRouter.Link, { to: 'create/' + item.id, className: 'editBtn controlBtn' }),
-                    _react2.default.createElement('div', { className: 'deleteBtn controlBtn' })
+                    _react2.default.createElement('div', { className: 'deleteBtn controlBtn', onClick: function onClick() {
+                            return deleteNote(item.id);
+                        } })
                 );
             });
 

@@ -41,9 +41,6 @@ class Create extends Component {
         indexNote !== -1 ? notes[indexNote] = note : notes.push(note);
         localStorage.setItem('testApp', JSON.stringify({notes}));
     }
-    deleteNote() {
-
-    }
     render() {
         return (
             <div className="createContainer">

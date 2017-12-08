@@ -21,19 +21,31 @@ export class MainPage extends Component {
             notes: JSON.parse(stringItems).notes
         }
     }
+    deleteNote(id) {
+        const notes = this.state.notes;
+        const indexNote = notes.findIndex(currentNote => (currentNote.id === id));
+        notes.splice(indexNote, 1);
+        this.setState({
+            notes
+        });
+        localStorage.setItem('testApp', JSON.stringify({notes}));
+    }
     render() {
         return (
             <div>
                <Link to="create" className="createBtn" />
-               <Notes data={this.state.notes} />
+               <Notes data={this.state.notes} deleteNote={(id) => this.deleteNote(id)} />
             </div>
         );
     }
 }
 
 class Notes extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
-        let data = this.props.data;
+        let {data, deleteNote} = this.props;
         let notesTemplate = data.map((item, index)=>{
             return (
                 <li className="note" key={index}>
@@ -41,7 +53,7 @@ class Notes extends Component {
                     <div className="note_description">{item.description}</div>
                     <span className="note_date">{item.date}</span>
                     <Link to={`create/${item.id}`} className="editBtn controlBtn" />
-                    <div className="deleteBtn controlBtn"></div>
+                    <div className="deleteBtn controlBtn" onClick={() => deleteNote(item.id)}></div>
                 </li>
             );
         });
